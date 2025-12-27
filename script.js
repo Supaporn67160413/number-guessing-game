@@ -24,6 +24,9 @@ function initializeGame() {
 
 // ฟังก์ชันตรวจสอบการทาย
 function checkGuess() {
+  if (isGameOver) {
+    return;
+  }
   const guessInput = document.getElementById("guessInput");
   const guessValue = parseInt(guessInput.value);
   const resultContainer = document.getElementById("resultContainer");

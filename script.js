@@ -47,10 +47,6 @@ function checkGuess() {
   updateDisplay();
   guessInput.value = "";
   guessInput.focus();
-
-  updateDisplay();
-  guessInput.value = "";
-  guessInput.focus();
 }
 
 //ฟังก์ชันอัปเดตจำนวนครั้ง

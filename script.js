@@ -50,6 +50,8 @@ function checkGuess() {
   attemptCount++;
 
   if (guessValue === secretNumber) {
+    clearInterval(timerInterval);
+    isGameOver = true;
     resultContainer.innerHTML = `
  <div class="alert alert-success" role="alert"><h5>✓ ถูกต้อง!</h5>
  <p>คุณทายถูกในครั้งที่ ${attemptCount}</p>
@@ -127,6 +129,8 @@ function startTimer() {
 
 function endGame() {
   isGameOver = true;
+
+  clearInterval(timerInterval);
 
   document.getElementById("resultContainer").innerHTML = `
     <div class="alert alert-danger" role="alert">

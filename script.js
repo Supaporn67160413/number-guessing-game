@@ -100,5 +100,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // ...existing code...
 
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 60;
+  isGameOver = false;
+
+  const timerContainer = document.getElementById("timerContainer");
+  timerContainer.textContent = `เวลาเหลือ: ${timeLeft} วินาที`;
+
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    timerContainer.textContent = `เวลาเหลือ: ${timeLeft} วินาที`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
+  }, 1000);
+}
+
 //เริ่มเกมเมื่อโหลดหน้า
 window.addEventListener("load", initializeGame);

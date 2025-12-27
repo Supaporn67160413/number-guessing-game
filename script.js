@@ -119,5 +119,15 @@ function startTimer() {
   }, 1000);
 }
 
+function endGame() {
+  isGameOver = true;
+
+  document.getElementById("resultContainer").innerHTML = `
+    <div class="alert alert-danger" role="alert">
+      หมดเวลา! เกมจบแล้ว
+    </div>
+  `;
+}
+
 //เริ่มเกมเมื่อโหลดหน้า
 window.addEventListener("load", initializeGame);

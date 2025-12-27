@@ -18,6 +18,8 @@ function checkGuess() {
   const guessInput = document.getElementById("guessInput");
   const guessValue = parseInt(guessInput.value);
   const resultContainer = document.getElementById("resultContainer");
+  // ... validation code ...
+  attemptCount++; //เพิ่มตรงนี้
   // Validation: ตรวจสอบว่าใส่ตัวเลขหรือไม่
   if (isNaN(guessValue) || guessInput.value === "") {
     resultContainer.innerHTML = `

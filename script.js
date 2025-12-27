@@ -6,20 +6,35 @@ let secretNumber = 0;
 //ตัวแปรนับจำนวนครั้งที่ทาย
 let attemptCount = 0;
 
+//ตัวแปรเวลาที่เหลือ
+let timeLeft = 60;
+
+// ตัวแปรเก็บ setInterval
+let timerInterval = null;
+
+//ตัวแปรเก็บว่าจบเกมรึยัง
+let isGameOver = false;
+
 //ฟังก์ชันเริ่มเกม
 function initializeGame() {
   secretNumber = Math.floor(Math.random() * 100) + 1;
   attemptCount = 0;
+
+  document.getElementById("resultContainer").innerHTML = "";
   updateDisplay();
+  startTimer(); // เริ่มจับเวลา
 }
 
 // ฟังก์ชันตรวจสอบการทาย
 function checkGuess() {
+  if (isGameOver) {
+    return;
+  }
   const guessInput = document.getElementById("guessInput");
   const guessValue = parseInt(guessInput.value);
   const resultContainer = document.getElementById("resultContainer");
   // ... validation code ...
-  attemptCount++; //เพิ่มตรงนี้
+
   // Validation: ตรวจสอบว่าใส่ตัวเลขหรือไม่
   if (isNaN(guessValue) || guessInput.value === "") {
     resultContainer.innerHTML = `
@@ -35,6 +50,8 @@ function checkGuess() {
   attemptCount++;
 
   if (guessValue === secretNumber) {
+    clearInterval(timerInterval);
+    isGameOver = true;
     resultContainer.innerHTML = `
  <div class="alert alert-success" role="alert"><h5>✓ ถูกต้อง!</h5>
  <p>คุณทายถูกในครั้งที่ ${attemptCount}</p>
@@ -90,6 +107,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 // ...existing code...
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 60;
+  isGameOver = false;
+
+  const timerContainer = document.getElementById("timerContainer");
+  timerContainer.textContent = `เวลาเหลือ: ${timeLeft} วินาที`;
+
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    timerContainer.textContent = `เวลาเหลือ: ${timeLeft} วินาที`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  isGameOver = true;
+
+  clearInterval(timerInterval);
+
+  document.getElementById("resultContainer").innerHTML = `
+    <div class="alert alert-danger" role="alert">
+      หมดเวลา! เกมจบแล้ว
+    </div>
+  `;
+}
 
 //เริ่มเกมเมื่อโหลดหน้า
 window.addEventListener("load", initializeGame);

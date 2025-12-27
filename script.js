@@ -19,7 +19,10 @@ let isGameOver = false;
 function initializeGame() {
   secretNumber = Math.floor(Math.random() * 100) + 1;
   attemptCount = 0;
+
+  document.getElementById("resultContainer").innerHTML = "";
   updateDisplay();
+  startTimer(); // เริ่มจับเวลา
 }
 
 // ฟังก์ชันตรวจสอบการทาย

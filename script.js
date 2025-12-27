@@ -6,6 +6,15 @@ let secretNumber = 0;
 //ตัวแปรนับจำนวนครั้งที่ทาย
 let attemptCount = 0;
 
+//ตัวแปรเวลาที่เหลือ
+let timeLeft = 60;
+
+// ตัวแปรเก็บ setInterval
+let timerInterval = null;
+
+//ตัวแปรเก็บว่าจบเกมรึยัง
+let isGameOver = false;
+
 //ฟังก์ชันเริ่มเกม
 function initializeGame() {
   secretNumber = Math.floor(Math.random() * 100) + 1;
